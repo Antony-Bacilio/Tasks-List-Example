@@ -43,7 +43,7 @@ class TareasProvider {
   }
 
 
-void agregarTarea(Map<String, dynamic> nuevaTarea) {
+  void agregarTarea(Map<String, dynamic> nuevaTarea) {
     _tareas.add(nuevaTarea);
   }
 
