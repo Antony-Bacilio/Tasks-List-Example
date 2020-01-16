@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../providers/tareas_provider.dart';
+import 'package:tasks_list/src/pages/detalle.dart';
+import 'package:tasks_list/src/pages/formulario.dart';
+import 'package:tasks_list/src/providers/tareas_provider.dart';
 import '../providers/tareas_provider.dart';
 
-class ListadoPage extends StatelessWidget {
+
+class ListadoPage extends StatefulWidget {
   const ListadoPage({Key key}) : super(key: key);
   
   static final nombrePagina = "listado";
@@ -28,24 +31,34 @@ class ListadoPage extends StatelessWidget {
 
   ];
 
+  @override
+  _ListadoPageState createState() => _ListadoPageState();
+}
 
-  @override 
+class _ListadoPageState extends State<ListadoPage> {
+  @override
+  //Définir ce qu'il y a à l'interieur
   Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(
           title: Text('Listado'),
         ),
         body: (TareasProvider().tareas.isNotEmpty)?ListView(
-          children: _crearItem(), //Définitions : Methode dans la Class 'ListadoPage' et Fonction dehors la Class
+          children: _crearItem(context), //Définitions : Methode dans la Class 'ListadoPage' et Fonction dehors la Class
         ):
         Center(
           child: Text("No tasks added"),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: ()=> Navigator.pushNamed(context, FormularioPage.nombrePagina),
+          child: Icon(
+            Icons.add,
+          ),
+        ),
       );
   }
 
-  //Méthode
-  List<Widget> _crearItem() {
+  List<Widget> _crearItem(BuildContext context) {
       List<Widget> tmp = [];
 
       //Lista de Tareas
@@ -68,6 +81,9 @@ class ListadoPage extends StatelessWidget {
       //Boucle qui utilise le Providers/tareas_provider.dart
       for (Map<String, dynamic> tarea in TareasProvider().tareas) {
         Widget item = ListTile(
+          onTap: () {
+              Navigator.pushNamed(context, DetallePage.nombrePagina, arguments: tarea);
+          },
           title: Text("${tarea['nombre']}"),
           trailing: (tarea['estado'])?Icon(Icons.star):Icon(Icons.star_border),
         );
@@ -78,5 +94,4 @@ class ListadoPage extends StatelessWidget {
       return tmp;
 
   }
-
 }

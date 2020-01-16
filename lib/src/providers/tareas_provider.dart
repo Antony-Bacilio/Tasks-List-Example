@@ -43,4 +43,31 @@ class TareasProvider {
   }
 
 
+void agregarTarea(Map<String, dynamic> nuevaTarea) {
+    _tareas.add(nuevaTarea);
+  }
+
+  void editarTarea(Map<String, dynamic> nuevaTarea, Map<String, dynamic> actualTarea){
+    for (var i = 0; i < tareas.length; i++) {
+      if(_tareas[i]==actualTarea){
+        _tareas[i]=nuevaTarea;
+        break;
+      }
+    }
+  }
+
+  void eliminarTarea(Map<String, dynamic> borrarTarea){
+    _tareas.remove(borrarTarea);
+  }
+
+  void terminarTarea(Map<String, dynamic> actualTarea){
+    for (var i = 0; i < tareas.length; i++) {
+      if(_tareas[i]==actualTarea){
+        actualTarea['estado']=true;
+        _tareas[i]=actualTarea;
+        break;
+      }
+    }
+  }
+
 }

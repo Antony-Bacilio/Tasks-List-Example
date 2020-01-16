@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:tasks_list/src/pages/detalle.dart';
+import 'package:tasks_list/src/pages/formulario.dart';
 import 'package:tasks_list/src/pages/listado.dart';
 
 import 'src/pages/listado.dart';
@@ -15,6 +17,8 @@ class MyApp extends StatelessWidget {
       initialRoute: ListadoPage.nombrePagina,
       routes: {
         ListadoPage.nombrePagina: (BuildContext context)=> ListadoPage(),
+        FormularioPage.nombrePagina:(BuildContext context) => FormularioPage(),
+        DetallePage.nombrePagina:(BuildContext context) => DetallePage(),
       },
     );
   }
